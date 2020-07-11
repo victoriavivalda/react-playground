@@ -1,10 +1,12 @@
 import React from 'react'
 import { battle } from '../utils/api'
 import Card from './Card'
-import { FaCompass, FaBriefcase, FaUsers, FaUserFriends, FaCode, FaUser } from 'react-icons/fa'
+import { FaCompass, FaBriefcase, FaUsers, FaUserFriends, FaUser } from 'react-icons/fa'
 import PropTypes from 'prop-types'
 import Loading from './Loading'
 import Tooltip from './Tooltip'
+import queryString from 'query-string'
+import { Link } from 'react-router-dom'
 
 function ProfileList({ profile }) {
     return (
@@ -38,7 +40,6 @@ function ProfileList({ profile }) {
                 {profile.following.toLocaleString()} following
             </li>
         </ul>
-
     )
 }
 
@@ -58,7 +59,7 @@ export default class Results extends React.Component {
         }
     }
     componentDidMount() {
-        const { playerOne, playerTwo } = this.props
+        const { playerOne, playerTwo } = queryString.parse(this.props.location.search)
 
         battle([playerOne, playerTwo])
             .then((players) => {
@@ -82,13 +83,11 @@ export default class Results extends React.Component {
         if (loading === true) {
             return <Loading />
         }
-
         if (error) {
             return (
                 <p className='center-text error'>{error}</p>
             )
         }
-
         return (
             <React.Fragment>
                 <div className='grid space-around container-sm'>
@@ -112,16 +111,12 @@ export default class Results extends React.Component {
                     </Card>
                 </div>
 
-                <button className='btn btn-dark btn-space' onClick={this.props.onReset} >
+                <Link
+                    className='btn btn-dark btn-space'
+                    to='/battle'>
                     Reset
-                </button>
+                </Link>
             </React.Fragment>
         )
     }
-}
-
-Results.propTypes = {
-    playerOne: PropTypes.string.isRequired,
-    playerTwo: PropTypes.string.isRequired,
-    onReset: PropTypes.func.isRequired
 }
