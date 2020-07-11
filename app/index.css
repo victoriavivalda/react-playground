@@ -44,8 +44,12 @@ li {
     font-size: 18px;
     font-weight: bold;
     text-decoration: none;
-    color: '#434343';    
     cursor: pointer;
+    color: inherit;
+}
+
+.nav li {
+    margin-right: 10px;
 }
 
 .grid {
@@ -55,6 +59,10 @@ li {
 
 .space-around {
     justify-content: space-around;
+}
+
+.space-between {
+    justify-content: space-between;
 }
 
 .header-lg {
