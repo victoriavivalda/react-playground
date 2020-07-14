@@ -30,7 +30,7 @@ export default function Nav() {
                         </li>
                     </ul>
                     <button
-                        style={{ fontSize: 30 }}
+                        style={{ fontSize: 30, cursor: 'pointer' }}
                         className='btn-clear'
                         onClick={toggleTheme}>
                         {theme === 'light' ? '🔦' : '💡'}
